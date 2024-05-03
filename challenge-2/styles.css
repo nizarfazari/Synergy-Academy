@@ -432,6 +432,12 @@ footer {
     .container-left {
         margin-left: 5%;
     }
+
+    .body__why-uses {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
 }
 
 
