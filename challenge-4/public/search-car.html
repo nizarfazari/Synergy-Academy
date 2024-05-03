@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rental Mobil</title>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- CDN Icons -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <!-- owl-carrousel -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/search.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body id="homepage">
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">CarsBinar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="offcanvas offcanvas-end canvas-nav"
+          tabindex="-1"
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">BCR</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul
+              class="d-flex align-items-center gap-4 mb-0 flex-column flex-lg-row ms-auto"
+            >
+              <li>
+                <a href="index.html" class="">Out Service</a>
+              </li>
+              <li>
+                <a href="about.html" class="">Why Us</a>
+              </li>
+              <li>
+                <a href="courses.html" class="">Testimonial</a>
+              </li>
+              <li><a href="contact.html" class="">FAQ</a></li>
+              <li>
+                <a href="courses.html" class="btn btn-primary">Register</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="header">
+      <div class="row align-items-center">
+        <div class="col-sm container-left">
+          <h1>Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
+          <p>
+            Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas
+            terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu
+            untuk sewa mobil selama 24 jam.
+          </p>
+        </div>
+        <div class="col-sm mt-5 mt-col-0">
+          <div class="d-flex justify-content-end">
+            <img
+              class="header__image"
+              src="./images/home/img_car-2.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Start Main -->
+    <main role="main">
+      <!-- Start Search -->
+      <section class="search-box">
+        <div class="search-content">
+          <div class="input-group d-flex flex-column">
+            <p>Tipe Driver</p>
+            <select class="form-select" id="driver" required>
+              <option class="item" value="" selected hidden>
+                Pilih Tipe Driver
+              </option>
+              <option class="item" value="true">Dengan Sopir</option>
+              <option class="item" value="false">
+                Tanpa Sopir (Lepas Kunci)
+              </option>
+            </select>
+          </div>
+          <div class="input-group d-flex flex-column">
+            <p>Tanggal</p>
+            <input type="date" class="form-control" id="date" required />
+          </div>
+          <div class="input-group d-flex flex-column">
+            <p>Waktu Jemput/Ambil</p>
+            <input type="time" id="time" class="form-control" required />
+          </div>
+          <div class="input-group d-flex flex-column">
+            <p>Jumlah Penumpang (Opsional)</p>
+            <div class="d-flex flex-row">
+              <input
+                type="number"
+                class="form-control item"
+                id="passanger"
+                style="background-color: #fff"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn button-search border-0 px-2"
+            id="load-btn"
+          >
+            Cari Mobil
+          </button>
+        </div>
+      </section>
+      <!-- End Search -->
+
+      <!-- Start Results -->
+      <div class="container result-container">
+        <div class="result d-flex" id="cars-container">
+          <!-- JSON Data -->
+        </div>
+      </div>
+      <!-- End Results -->
+    </main>
+    <!-- End Main -->
+
+    <footer>
+      <div class="container footers">
+        <div class="footer__description">
+          <ul class="footer__1">
+            <li>
+              <p>Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</p>
+            </li>
+            <li>
+              <p>binarcarrental@gmail.com</p>
+            </li>
+            <li>
+              <p>081-233-334-808</p>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__information">
+          <ul class="footer__2">
+            <li><a href="index.html">Out Service</a></li>
+            <li><a href="about.html">Why Us</a></li>
+            <li><a href="courses.html">Testimonial</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer__social-media">
+          <p>Connect with us</p>
+          <ul class="social-media">
+            <li><i class="uil uil-facebook-f socialmedia__icon"></i></li>
+            <li><i class="uil uil-instagram socialmedia__icon"></i></li>
+            <li><i class="uil uil-twitter-alt socialmedia__icon"></i></li>
+            <li><i class="uil uil-envelope-alt socialmedia__icon"></i></li>
+            <li><i class="uil uil-whatsapp socialmedia__icon"></i></li>
+          </ul>
+        </div>
+        <div class="footer__3">
+          <p>Copyright Binar 2022</p>
+          <a href="">
+            <h4>CarsBinar</h4>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <!-- End Body -->
+
+  <!-- bootstrap -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <!-- jquery -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <!-- owl-carrousel -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <!-- Default JS -->
+
+  <script type="text/javascript" src="./scripts/binar.js"></script>
+  <script type="text/javascript" src="./scripts/app.js"></script>
+  <script type="text/javascript" src="./scripts/car.js"></script>
+  <script type="text/javascript" src="./scripts/main.js"></script>
+</html>
