@@ -11,6 +11,7 @@ export class CarsValidation {
     category: Joi.string().min(1).max(255).required(),
     start_rent: Joi.date().required(),
     finish_rent: Joi.date().greater(Joi.ref("start_rent")).required(),
+    created_by: Joi.string().min(1).max(255).required(),
   });
 
   static readonly UPDATE = Joi.object({
@@ -23,5 +24,6 @@ export class CarsValidation {
     category: Joi.string().min(1).max(255).optional(),
     start_rent: Joi.date().optional(),
     finish_rent: Joi.date().greater(Joi.ref("start_rent")).optional(),
+    updated_by: Joi.string().min(1).max(255).required(),
   });
 }

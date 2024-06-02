@@ -6,10 +6,13 @@ import cloudinary from "../middleware/cloudinary";
 import { ErrorResponse } from "../errors/error-response";
 import CarServices from "../services/car-services";
 import { CarsValidation } from "../validation/car-validation";
+import { User } from "../model/user";
+type UserReq = {
+  user : User
+}
 
-export async function getCars(req: Request, res: Response) {
+export async function getCars(req: Request , res: Response) {
   const { q } = req.query;
-
   const cars = await CarServices.list();
 
   return res.status(200).json({
@@ -41,9 +44,11 @@ export async function deleteCars(req: Request, res: Response, next: NextFunction
   }
 }
 
-export async function addCars(req: Request, res: Response, next: NextFunction) {
+export async function addCars(req: any, res: Response, next: NextFunction) {
   try {
     const carRequest = req.body;
+    carRequest.created_by = req.user.nama
+    console.log(req.file)
     const car = await CarServices.create(carRequest, req.file);
 
     res.status(201).json({
@@ -54,11 +59,13 @@ export async function addCars(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export async function updateCars(req: Request, res: Response, next: NextFunction) {
+export async function updateCars(req: any, res: Response, next: NextFunction) {
   const { id } = req.params;
 
   try {
-    const car = await CarServices.update(id,req.body,req.file)
+    const carRequest = req.body;
+    carRequest.updated_by = req.user.nama
+    const car = await CarServices.update(id,carRequest,req.file)
     console.log(car)
     res.status(201).json({
       data: car,

@@ -74,6 +74,7 @@ export default class CarServices {
     try {
       const fileBase64 = file?.buffer.toString("base64");
       const fileString = `data:${file?.mimetype};base64,${fileBase64}`;
+      console.log(file)
       const result = await cloudinary.uploader.upload(fileString);
       return result.url;
     } catch (e) {

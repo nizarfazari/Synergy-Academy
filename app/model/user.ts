@@ -7,8 +7,6 @@ export class UserModel extends Model {
   password!: string;
   avatar!: string;
   role!: string;
-  created_by!: string;
-  updated_by!: string;
   created_at!: string;
   updated_at!: string;
 

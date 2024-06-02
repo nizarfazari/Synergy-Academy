@@ -1,7 +1,7 @@
 import express from 'express';
 import { authorize, checkAccess } from '../middleware/authorization';
 import { addCars, getCars, getCarskById ,deleteCars , updateCars} from "../controller/car-controller";
-import uploadOnMemory from "../middleware/multer";
+import uploadOnMemory from "../middleware/multerMemory";
 import { registerAdmin, whoAmI } from '../controller/user-controllers';
 export const apiRouter = express.Router()
 apiRouter.use(authorize)

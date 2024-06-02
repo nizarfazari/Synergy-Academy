@@ -15,6 +15,9 @@ export class CarsModel extends Model {
   start_rent!: Date;
   finish_rent!: Date;
   image_url!: string;
+  created_by!: string;
+  updated_by!: string;
+
 
   static get tableName() {
     return "cars";
