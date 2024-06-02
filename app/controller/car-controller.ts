@@ -10,16 +10,12 @@ import { CarsValidation } from "../validation/car-validation";
 export async function getCars(req: Request, res: Response) {
   const { q } = req.query;
 
-  if (!q) {
-    const books = await CarsModel.query();
-    return res.status(200).json(books);
-  }
-
-  const books = await CarsModel.query()
-    .whereLike("size", `%${q}%`)
-    .orWhereLike("name", `%${q}%`);
-
-  return res.status(200).json(books);
+  const cars = await CarServices.list()
+  
+  return res.status(200).json({
+    data : cars.data,
+    count : cars.total
+  });
 }
 
 export async function getCarskById(req: Request, res: Response) {

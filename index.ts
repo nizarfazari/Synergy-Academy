@@ -6,7 +6,7 @@ import { Model } from "objection";
 import upload from "./app/middleware/multer";
 import uploadOnMemory from "./app/middleware/multerMemory";
 import path from "path";
-import { addCars } from "./app/controller/car-controller";
+import { addCars, getCars } from "./app/controller/car-controller";
 import { errorMiddleware } from "./app/middleware/error-middlewate";
 
 const port = process.env.PORT || 5000;
@@ -25,7 +25,7 @@ Model.knex(knexInstance);
 app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use(express.json());
 
-// app.get("/api/v1/cars", getCars);
+app.get("/api/v1/cars", getCars);
 // app.get("/api/v1/cars/:id", getCarskById);
 // app.delete("/api/v1/cars/:id", deleteCars);
 app.post("/api/v1/cars", uploadOnMemory.single('image_url'), addCars)

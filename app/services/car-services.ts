@@ -18,6 +18,11 @@ export default class CarServices {
     });
   }
 
+  static async list(){
+    const cars = await CarsRepostory.list()
+   return cars
+  }
+
   static async upload(file: any) {
     try {
       const fileBase64 = file?.buffer.toString("base64");
