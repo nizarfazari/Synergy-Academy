@@ -44,58 +44,26 @@ export async function deleteCars(req: Request, res: Response, next: NextFunction
 export async function addCars(req: Request, res: Response, next: NextFunction) {
   try {
     const carRequest = req.body;
-    const books = await CarServices.create(carRequest, req.file);
+    const car = await CarServices.create(carRequest, req.file);
 
     res.status(201).json({
-      data: books,
+      data: car,
     });
   } catch (error) {
     next(error);
   }
 }
 
-export async function updateCars(req: Request, res: Response) {
+export async function updateCars(req: Request, res: Response, next: NextFunction) {
   const { id } = req.params;
 
-  if (!req.file) {
-    try {
-      const books = await CarsModel.query()
-        .where({ id })
-        .patch(req.body)
-        .throwIfNotFound()
-        .returning("*");
-
-      return res.status(200).send("Data berhasil di update");
-    } catch (e) {
-      return res.status(404).send("Data tidak ditemukan!");
-    }
+  try {
+    const car = await CarServices.update(id,req.body,req.file)
+    console.log(car)
+    res.status(201).json({
+      data: car,
+    });
+  } catch (e) {
+    next(e)
   }
-
-  const fileBase64 = req.file.buffer.toString("base64");
-  const file = `data:${req.file.mimetype};base64,${fileBase64}`;
-
-  cloudinary.uploader.upload(
-    file,
-    async function (err: UploadApiErrorResponse, result: UploadApiResponse) {
-      if (!!err) {
-        console.log(err);
-        return res.status(400).send("Gagal upload file");
-      }
-
-      try {
-        const books = await CarsModel.query()
-          .where({ id })
-          .patch({
-            ...req.body,
-            image_url: result.url,
-          })
-          .throwIfNotFound()
-          .returning("*");
-
-        return res.status(200).send("Data berhasil di update");
-      } catch (e) {
-        return res.status(404).send("Data tidak ditemukan!");
-      }
-    }
-  );
 }

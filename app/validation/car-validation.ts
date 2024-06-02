@@ -12,4 +12,16 @@ export class CarsValidation {
     start_rent: Joi.date().required(),
     finish_rent: Joi.date().greater(Joi.ref("start_rent")).required(),
   });
+
+  static readonly UPDATE = Joi.object({
+    id: Joi.number(),
+    size: Joi.string()
+      .valid(...sizeCarEnum)
+      .optional(),
+    name: Joi.string().min(1).max(255).optional(),
+    price: Joi.number().positive().optional(),
+    category: Joi.string().min(1).max(255).optional(),
+    start_rent: Joi.date().optional(),
+    finish_rent: Joi.date().greater(Joi.ref("start_rent")).optional(),
+  });
 }

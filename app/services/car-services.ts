@@ -6,16 +6,42 @@ import CarsRepostory from "../repositories/car-repository";
 import { CarsValidation } from "../validation/car-validation";
 
 export default class CarServices {
-  static async create(RequestBody: Cars, RequestFile : any) {
-    const { value, error } = CarsValidation.CREATE.validate(RequestBody,  { abortEarly: false });
+  static async create(requestBody: Cars, requestFile : any) {
+    const { value, error } = CarsValidation.CREATE.validate(requestBody,  { abortEarly: false });
     if(error){
       throw new ErrorResponse(400, error.details.map(detail => detail.message).join(','))
     }
-    const fileUplaod = await this.upload(RequestFile);
+    const fileUplaod = await this.upload(requestFile);
     return CarsRepostory.create({
       ...value,
       image_url : fileUplaod
     });
+  }
+  static async update(idCarsUpdate : number | string , requestBody: Cars, requestFile : any) {
+    const { value, error } = CarsValidation.UPDATE.validate(requestBody,  { abortEarly: false });
+    if(error){
+      throw new ErrorResponse(400, error.details.map(detail => detail.message).join(','))
+    }
+    try {
+
+    const car = await CarsRepostory.findById(idCarsUpdate);
+    if(car){
+      if(!requestFile){
+        return CarsRepostory.update(idCarsUpdate , {
+         ...value,
+       });
+     }
+     const fileUplaod = await this.upload(requestFile);
+     return CarsRepostory.update(idCarsUpdate , {
+       ...value,
+       image_url : fileUplaod
+     });
+    }
+
+   
+    } catch (error) {
+      throw new ErrorResponse(404, "Cars Not Found");
+    }
   }
 
   static async list(){
