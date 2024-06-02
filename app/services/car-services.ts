@@ -23,6 +23,14 @@ export default class CarServices {
    return cars
   }
 
+
+  static async getById(idCars : string | number){
+
+    const car = await CarsRepostory.findById(idCars)
+
+    return car
+  }
+
   static async upload(file: any) {
     try {
       const fileBase64 = file?.buffer.toString("base64");

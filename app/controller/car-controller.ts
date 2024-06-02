@@ -19,10 +19,9 @@ export async function getCars(req: Request, res: Response) {
 }
 
 export async function getCarskById(req: Request, res: Response) {
-  const { id } = req.params;
-
   try {
-    const cars = await CarsModel.query().findById(id).throwIfNotFound();
+    const { id } = req.params;
+    const cars = await CarServices.getById(id);
     return res.status(200).json(cars);
   } catch (e) {
     return res.status(404).send("Data tidak ditemukan!");
