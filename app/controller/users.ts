@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ErrorResponse } from "../../errors/error-response";
+import { ErrorResponse } from "../errors/error-response";
 import jwt from "jsonwebtoken";
-import { UserModel } from "../../model/users";
+import { UserModel } from "../model/users";
 
 export async function login(req: Request, res: Response) {
   const { email, password } = req.body;
