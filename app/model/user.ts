@@ -1,17 +1,32 @@
 import { Model, ModelObject } from "objection";
 
 export class UserModel extends Model {
-  username!: string;
+  id!: number;
+  nama!: string;
   email!: string;
   password!: string;
-  token!: string;
+  avatar!: string;
+  role!: string;
+  created_by!: string;
+  updated_by!: string;
+  created_at!: string;
+  updated_at!: string;
+
+  static get tableName() {
+    return "users";
+  }
 }
 
-export type Users = ModelObject<UserModel>;
+export type RequestUserRegister = {
+  nama: string;
+  email: string;
+  password: string;
+  avatar: string;
+};
 
-export function UserResponse(user: Users) {
-  return {
-    token: user.token,
-    email: user.email,
-  };
-}
+export type RequestUserLogin = {
+  email: string;
+  password: string;
+};
+
+export type User = ModelObject<UserModel>;

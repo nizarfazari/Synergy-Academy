@@ -16,7 +16,11 @@ const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations",
+      directory: "./db/migrations"
     },
+    seeds: {
+      directory: "./db/seeds"
+    }
   },
 
   staging: {
@@ -32,7 +36,11 @@ const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations",
+      directory: "./db/migrations"
     },
+    seeds: {
+      directory: "./db/seeds"
+    }
   },
 
   production: {

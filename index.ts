@@ -7,7 +7,9 @@ import upload from "./app/middleware/multer";
 import uploadOnMemory from "./app/middleware/multerMemory";
 import path from "path";
 import { addCars, getCars, getCarskById ,deleteCars , updateCars} from "./app/controller/car-controller";
+import { login, register, whoAmI} from "./app/controller/user-controllers";
 import { errorMiddleware } from "./app/middleware/error-middlewate";
+import { authorize } from "./app/middleware/authorization";
 
 const port = process.env.PORT || 5000;
 const app: Express = express();
@@ -31,6 +33,10 @@ app.delete("/api/v1/cars/:id", deleteCars);
 app.post("/api/v1/cars", uploadOnMemory.single('image_url'), addCars)
 app.put("/api/v1/cars/:id", uploadOnMemory.single('image_url'), updateCars)
 
+
+app.post("/api/v1/register" , register)
+app.post("/api/v1/login" , login)
+app.get("/api/v1/me",authorize , whoAmI )
 
 
 app.use(errorMiddleware)
