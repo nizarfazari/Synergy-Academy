@@ -22,6 +22,7 @@ export default class CarServices {
     const cars = await CarsRepostory.list()
    return cars
   }
+  
 
 
   static async getById(idCars : string | number){
@@ -29,6 +30,18 @@ export default class CarServices {
     const car = await CarsRepostory.findById(idCars)
 
     return car
+  }
+
+
+  static async delete(idCars: string | number){
+    try {
+      const car = await CarsRepostory.findById(idCars);
+      await CarsRepostory.delete(idCars)
+      return car
+    } catch (error) {
+      throw new ErrorResponse(404, "Cars Not Found");
+    }
+
   }
 
   static async upload(file: any) {

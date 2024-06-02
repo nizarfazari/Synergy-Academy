@@ -3,6 +3,7 @@ import { ErrorResponse } from "../errors/error-response";
 import Joi from "joi";
 
 export const errorMiddleware = async (error: Error, req: Request, res: Response, next: NextFunction ) => {
+    console.log(error, "middleware")
     if (error instanceof Joi.ValidationError) {
         console.log(error ,'di middleware')
         res.status(400).json({
