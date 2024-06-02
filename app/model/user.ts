@@ -22,6 +22,7 @@ export type RequestUserRegister = {
   email: string;
   password: string;
   avatar: string;
+  role : string;
 };
 
 export type RequestUserLogin = {

@@ -1,12 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ErrorResponse } from "../errors/error-response";
 import jwt from "jsonwebtoken";
-import {
-  RequestUserLogin,
-  RequestUserRegister,
-  User,
-  UserModel,
-} from "../model/user";
+import { RequestUserLogin, RequestUserRegister } from "../model/user";
 import UserServices from "../services/user-services";
 
 export async function login(req: Request, res: Response, next: NextFunction) {
@@ -24,13 +19,29 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export async function register(
+export async function register(req: any, res: Response, next: NextFunction) {
+  try {
+    const userRequest: RequestUserRegister = req.body as RequestUserRegister;
+    userRequest.role = "member";
+    const user = await UserServices.register(userRequest);
+
+    res.status(201).send({
+      data: user,
+      message: "Berhasil Login",
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function registerAdmin(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
     const userRequest: RequestUserRegister = req.body as RequestUserRegister;
+    userRequest.role = "admin";
     const user = await UserServices.register(userRequest);
 
     res.status(201).send({

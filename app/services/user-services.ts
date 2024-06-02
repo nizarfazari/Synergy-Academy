@@ -38,28 +38,22 @@ export default class UserServices {
   }
 
   static async register(request: RequestUserRegister) {
-    const isEmailExists: User | null = await UserRepository.findEmail(request.email);
-    if(isEmailExists){
-        throw new ErrorResponse(400 , "Email Sudah di gunakan")
+    const isEmailExists: User | null = await UserRepository.findEmail(
+      request.email
+    );
+    if (isEmailExists) {
+      throw new ErrorResponse(400, "Email Sudah di gunakan");
     }
     try {
       const encryptedPassword = await encryptPassword(request.password);
       const user = UserRepository.create({
-        email : request.email,
+        ...request,
         password: encryptedPassword,
-        nama : request.nama,
-        role: "user",
-        avatar : request.avatar,
       });
 
-      return user
+      return user;
     } catch (e) {
-      throw new ErrorResponse(500, "Gagal Mendaftar")
+      throw new ErrorResponse(500, "Gagal Mendaftar");
     }
   }
-
-
-  
-
-  
 }

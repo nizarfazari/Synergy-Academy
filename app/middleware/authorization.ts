@@ -12,8 +12,7 @@ export async function authorize(req:any, res:Response, next:NextFunction){
         req.user = await UserModel
         .query()
         .findOne({ id : tokenPayload.id })
-        
-        console.log(req.user)
+
         next();
 
     } catch(err) {
@@ -24,6 +23,7 @@ export async function authorize(req:any, res:Response, next:NextFunction){
 }
 
 export function checkAccess(role: string[]){
+
     return (req:any, res:Response, next:NextFunction) => {
         if(!role.includes(req.user.role)) {
             return res.status(401).json({
