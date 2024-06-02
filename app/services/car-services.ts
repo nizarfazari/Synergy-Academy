@@ -6,20 +6,19 @@ import CarsRepostory from "../repositories/car-repository";
 import { CarsValidation } from "../validation/car-validation";
 
 export default class CarServices {
-  async create(RequestBody: Cars, RequestFile : any) {
+  static async create(RequestBody: Cars, RequestFile : any) {
     const { value, error } = CarsValidation.CREATE.validate(RequestBody,  { abortEarly: false });
     if(error){
       throw new ErrorResponse(400, error.details.map(detail => detail.message).join(','))
     }
     const fileUplaod = await this.upload(RequestFile);
-    const cars = new CarsRepostory();
-    return cars.create({
+    return CarsRepostory.create({
       ...value,
       image_url : fileUplaod
     });
   }
 
-  async upload(file: any) {
+  static async upload(file: any) {
     try {
       const fileBase64 = file?.buffer.toString("base64");
       const fileString = `data:${file?.mimetype};base64,${fileBase64}`;

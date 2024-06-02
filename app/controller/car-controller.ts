@@ -47,9 +47,7 @@ export async function deleteCars(req: Request, res: Response) {
 export async function addCars(req: Request, res: Response, next: NextFunction) {
   try {
     const carRequest = req.body
-    const carServices = new CarServices();
-
-    const books = await carServices.create(carRequest, req.file);
+    const books = await CarServices.create(carRequest, req.file);
 
     res.status(201).json({
       data: books,
