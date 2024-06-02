@@ -207,9 +207,9 @@
           "tags": [
             "cars"
           ],
-          "summary": "Get books lists",
-          "description": "Get books Lists",
-          "operationId": "getBooks",
+          "summary": "Get cars lists",
+          "description": "Get cars Lists",
+          "operationId": "getcars",
           "responses": {
             "200": {
               "description": "Successful operation",
@@ -217,14 +217,17 @@
                 "application/json": {
                   "schema": {
                     "type": "array",
+                    "required" : [
+                      "name", "category", "price", "start_rent" , "finish_rent" , "image_url"
+                    ],
                     "items": {
                       "type": "object",
                       "properties": {
-                        "title": {
+                        "name": {
                           "type": "string",
-                          "example": "Buku A"
+                          "example": "Car A"
                         },
-                        "author": {
+                        "category": {
                           "type": "string",
                           "example": "Shakespear"
                         },
@@ -232,7 +235,96 @@
                           "type": "number",
                           "example": 50000
                         },
-                        "cover": {
+                        "start_rent": {
+                          "type": "string",
+                          "example": "2024-05-31T17:00:00.000Z"
+                        },
+                        "finish_rent": {
+                          "type": "string",
+                          "example": "2024-06-09T17:00:00.000Z"
+                        },
+                        "image_url": {
+                          "type": "string",
+                          "example": "http://cloudinary.com/213125123"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "Error!"
+                      },
+                      "code": {
+                        "type": "integer",
+                        "example": 500
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Internal Server Error!"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "auth": []
+            }
+          ]
+        },
+        "put": {
+          "tags": [
+            "cars"
+          ],
+          "summary": "Get cars lists",
+          "description": "Get cars Lists",
+          "operationId": "getcars",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "required" : [
+                      "name", "category", "price", "start_rent" , "finish_rent" , "image_url"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Car A"
+                        },
+                        "category": {
+                          "type": "string",
+                          "example": "Shakespear"
+                        },
+                        "price": {
+                          "type": "number",
+                          "example": 50000
+                        },
+                        "start_rent": {
+                          "type": "string",
+                          "example": "2024-05-31T17:00:00.000Z"
+                        },
+                        "finish_rent": {
+                          "type": "string",
+                          "example": "2024-06-09T17:00:00.000Z"
+                        },
+                        "image_url": {
                           "type": "string",
                           "example": "http://cloudinary.com/213125123"
                         }
@@ -277,21 +369,24 @@
           "tags": [
             "cars"
           ],
-          "summary": "Add a new books",
-          "description": "Add a new books",
-          "operationId": "addBooks",
+          "summary": "Add a new cars",
+          "description": "Add a new cars",
+          "operationId": "addcars",
           "requestBody": {
             "required": true,
             "content": {
               "multipart/form-data": {
                 "schema": {
+                  "required" : [
+                    "name", "category", "price", "start_rent" , "finish_rent" , "image_url"
+                  ],
                   "type": "object",
                   "properties": {
-                    "title": {
+                    "name": {
                       "type": "string",
-                      "example": "Buku A"
+                      "example": "Car A"
                     },
-                    "author": {
+                    "category": {
                       "type": "string",
                       "example": "Shakespear"
                     },
@@ -299,7 +394,15 @@
                       "type": "number",
                       "example": 50000
                     },
-                    "cover": {
+                    "start_rent": {
+                      "type": "string",
+                      "example": "2024-05-31T17:00:00.000Z"
+                    },
+                    "finish_rent": {
+                      "type": "string",
+                      "example": "2024-06-09T17:00:00.000Z"
+                    },
+                    "image_url": {
                       "type": "string",
                       "format": "binary",
                       "example": "http://www.africau.edu/images/default/sample.pdf"
