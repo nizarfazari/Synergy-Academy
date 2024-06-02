@@ -11,8 +11,9 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     const user = await UserServices.login(userRequest);
 
     res.status(201).send({
+      status: "Success",
       data: user,
-      message: "Berhasil Membuat User",
+      message: "Berhasil Login!",
     });
   } catch (error) {
     next(error);
@@ -26,8 +27,9 @@ export async function register(req: any, res: Response, next: NextFunction) {
     const user = await UserServices.register(userRequest);
 
     res.status(201).send({
+      status: "Success",
       data: user,
-      message: "Berhasil Login",
+      message: "Berhasil Register!",
     });
   } catch (error) {
     next(error);

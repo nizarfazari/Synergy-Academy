@@ -42,16 +42,20 @@ export default class UserServices {
       request.email
     );
     if (isEmailExists) {
-      throw new ErrorResponse(400, "Email Sudah di gunakan");
+      throw new ErrorResponse(400, "Email sudah terdaftar!");
     }
     try {
       const encryptedPassword = await encryptPassword(request.password);
-      const user = UserRepository.create({
+      const user = await UserRepository.create({
         ...request,
         password: encryptedPassword,
       });
 
-      return user;
+      return {
+        email : user.email,
+        nama : user.nama,
+        avatar : user.avatar,
+      };
     } catch (e) {
       throw new ErrorResponse(500, "Gagal Mendaftar");
     }

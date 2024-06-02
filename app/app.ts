@@ -5,6 +5,9 @@ import { publicRouter } from "./route/public-api";
 import { errorMiddleware } from "./middleware/error-middlewate";
 import path from "path";
 import { apiRouter } from "./route/api";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../openapi.json';
+
 
 export const app: Express = express();
 //knex
@@ -20,6 +23,11 @@ const knexInstance = knex({
 Model.knex(knexInstance);
 app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use(express.json());
+publicRouter.use('/api/v1/api-docs', swaggerUi.serve);
+publicRouter.get('/api/v1/api-docs', swaggerUi.setup(swaggerDocument));
+
+
+
 app.use(publicRouter);
 app.use(apiRouter);
 app.use(errorMiddleware);
