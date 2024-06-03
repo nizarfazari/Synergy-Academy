@@ -8,7 +8,7 @@ apiRouter.use(authorize)
 
 
 // API USER
-apiRouter.get("/api/v1/me" , whoAmI)
+apiRouter.get("/api/v1/users/me" , whoAmI)
 apiRouter.post("/api/v1/register-admin", checkAccess(['super-admin']) , registerAdmin)
 
 // CAR API
