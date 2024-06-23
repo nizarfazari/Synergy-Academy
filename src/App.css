@@ -1,0 +1,146 @@
+
+.wrapper{
+    background-color: #F4F5F7;
+}
+
+.sidebar{
+    width: 70px;
+    background: #0D28A6;
+    min-height: 100vh;
+    position: absolute;
+    left: 0px;
+}
+
+
+.sidebar-nav {
+    height: 70px;
+    background: #000;
+}
+
+.content {
+    margin-left: 70px;
+    display: flex;
+
+}
+
+
+.sidebar-detail {
+    width: 220px;
+    background: white;
+    height: 700px;
+}
+
+.sidebar-detail h1 {
+    color: #8A8A8A;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 24px;
+    margin-top: 20px;
+}
+
+.sidebar-detail .content-detail {
+    color: #151515;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 11px 24px;
+    height: 42px;
+    background-color: #CFD4ED;
+    font-weight: 700;
+}
+
+
+.square{
+    background-color: #CFD4ED;
+    width: 34px;
+    height: 30px;
+    margin: 20px auto;
+}
+
+.sidebar-wrapper {
+    
+}
+
+
+.sidebar-content{
+    color: #FFFFFF;
+    height: 64px;
+    padding: 20px 23px;
+    background-color: antiquewhite;
+}
+
+
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb li + li::before {
+    content: '>';
+    margin: 0 0.5rem;
+    color: #000000;
+    font-weight: 700;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 700;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb li:last-child {
+    color: #6c757d; 
+}
+
+.breadcrumb li:last-child a {
+    color: #6c757d; 
+    pointer-events: none; 
+    text-decoration: none; 
+}
+
+.heading-border{
+    padding-left: 7px;
+    border-left: 4px solid #0D28A6;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+.heading-cars {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.table-dashboard {
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.table-dashboard tr{
+    height: 44px;
+}
+
+.table-dashboard tbody tr{
+    border-bottom: 1px solid #6c757d;
+}
+
+
+.table-dashboard tbody tr:last-child{
+    border-bottom: none;
+}
+
