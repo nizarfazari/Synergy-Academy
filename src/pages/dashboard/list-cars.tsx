@@ -4,10 +4,12 @@ import { CiClock1 } from "react-icons/ci";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { convertToISODate } from "../../utils/date-format";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListCars() {
     const [cars, setCars] = useState([]);
+    const navigate = useNavigate()
     useEffect(() => {
         fetchCars();
     }, []); // Fetch data saat komponen dimuat pertama kali
@@ -27,7 +29,32 @@ export default function ListCars() {
     };
 
 
-    console.log(cars)
+    const onDeleteCars = async (id: number) => {
+        try {
+            const localUser = localStorage.getItem('user');
+            if (localUser) {
+                const user = JSON.parse(localUser)
+
+                const response = await fetch(`http://localhost:5000/api/v1/cars/${id}`, {
+                    method: 'delete',
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed get data');
+                }
+                const data = await response.json();
+                window.location.reload()
+            }
+
+
+        } catch (error: any) {
+            console.error('data cant get:', error);
+
+        }
+    }
     return (
         <>
             <ul className="breadcrumb">
@@ -60,18 +87,18 @@ export default function ListCars() {
                         <h1 className="text-lg mb-2">Rp. {val.price} /hari</h1>
                         <div className="flex items-center gap-2 mb-2">
                             <IoKeyOutline className="text-[#8A8A8A] text-lg" />
-                            <p className="text-md">{ convertToISODate(val.start_rent)} - { convertToISODate(val.finish_rent)}</p>
+                            <p className="text-md">{convertToISODate(val.start_rent)} - {convertToISODate(val.finish_rent)}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <CiClock1 className="text-[#8A8A8A] text-lg" />
-                            <p>{ convertToISODate(val.updated_at)}</p>
+                            <p>{convertToISODate(val.updated_at)}</p>
                         </div>
                         <div className="grid grid-cols-2 gap-4 w-full mt-4">
-                            <button className="border !border-[#FA2C5A] text-[#FA2C5A] px-3 py-2 flex items-center gap-3 justify-center">
+                            <button onClick={() => onDeleteCars(val.id)} className="border !border-[#FA2C5A] text-[#FA2C5A] px-3 py-2 flex items-center gap-3 justify-center">
                                 <FaTrash />
                                 <p>Delete</p>
                             </button>
-                            <a href="/dashboard/edit" className="text-white bg-[#5CB85F] px-3 py-2 flex items-center gap-3 justify-center">
+                            <a href={`/dashboard/edit/${val.id}`} className="text-white bg-[#5CB85F] px-3 py-2 flex items-center gap-3 justify-center">
                                 <FaEdit />
                                 <p>Edit</p>
                             </a>
