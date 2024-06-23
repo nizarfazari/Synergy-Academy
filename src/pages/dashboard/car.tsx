@@ -50,20 +50,23 @@ export default function Car() {
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody className="text-center">
+                    {/* <tbody className="text-center">
                         {cars && cars.map((val: any, index: number) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>user1@example.com</td>
-                                <td>{val.name}</td>
-                                <td>{val.start_rent}</td>
-                                <td>{val.finish_rent}</td>
-                                <td>{val.price}</td>
-                                <td>Completed</td>
+                            <td>{index + 1}</td>
+                            <td>user1@example.com</td>
+                            <td>{val.name}</td>
+                            <td>{val.start_rent}</td>
+                            <td>{val.finish_rent}</td>
+                            <td>{val.price}</td>
+                            <td>Completed</td>
                             </tr>
-                        ))}
-                    </tbody>
+                            ))}
+                            </tbody> */}
                 </table>
+                <div className="text-center bg-white">
+                    Data Kosong
+                </div>
 
 
                 <div className="flex justify-between mt-8 items-center">
@@ -158,11 +161,11 @@ export default function Car() {
                                 <td>{val.name}</td>
                                 <td>{val.category}</td>
                                 <td>{val.price}</td>
-                                <td>{ convertToISODate(val.start_rent)}</td>
+                                <td>{convertToISODate(val.start_rent)}</td>
                                 <td>{convertToISODate(val.finish_rent)}</td>
                                 <td>{convertToISODate(val.created_at)}</td>
                                 <td>{convertToISODate(val.updated_at)}</td>
-                                
+
                             </tr>
                         ))}
                     </tbody>
