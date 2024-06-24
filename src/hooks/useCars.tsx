@@ -38,15 +38,19 @@ export const CarsProvider = ({ children }: CarsProps) => {
     const findCars = async (e: any, data: FormData) => {
         e.preventDefault();
         console.log(data)
-        const dateTime = new Date(`${data.date} ${data.time}`);
+        const dateTime = new Date(`${data.date} ${data.time}`).toISOString();
 
         if (data.driver === undefined || data.driver === "") {
             alert("Please select a driver");
             return;
         } else if (data.passenger == "" && data.driver.toString() == "true") {
-            console.log(cars)
+            cars.filter(
+                (car: any) => {
+                    console.log(dateTime)
+                }
+            )
             const carFilter = cars.filter(
-                (car: any) => (car.available === true && car.availableAt <= dateTime)
+                (car: any) => car.available === true && car.availableAt <= dateTime
             );
 
             console.log(carFilter)
