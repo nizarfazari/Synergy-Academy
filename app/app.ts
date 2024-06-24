@@ -7,7 +7,7 @@ import path from "path";
 import { apiRouter } from "./route/api";
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../openapi.json';
-
+import cors  from 'cors'
 
 export const app: Express = express();
 //knex
@@ -23,6 +23,7 @@ const knexInstance = knex({
 Model.knex(knexInstance);
 app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use(express.json());
+app.use(cors());
 publicRouter.use('/api/v1/api-docs', swaggerUi.serve);
 publicRouter.get('/api/v1/api-docs', swaggerUi.setup(swaggerDocument));
 

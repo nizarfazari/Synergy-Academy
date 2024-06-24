@@ -23,5 +23,5 @@ export async function checkPassword(encryptedPassword: string, password: string)
 }
 
 export async function createToken(payload:any){
-    return jwt.sign(payload, "halosayang", { expiresIn: '1800s' })
+    return jwt.sign(payload, "halosayang", { expiresIn: '604800s' })
 }

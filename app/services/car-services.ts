@@ -70,7 +70,7 @@ export default class CarServices {
 
   }
 
-  static async upload(file: any) {
+  static async  upload(file: any) {
     try {
       const fileBase64 = file?.buffer.toString("base64");
       const fileString = `data:${file?.mimetype};base64,${fileBase64}`;
