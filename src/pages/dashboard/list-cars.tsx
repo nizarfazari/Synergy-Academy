@@ -76,12 +76,13 @@ export default function ListCars() {
                 <button className="border !border-[#AEB7E1] px-3 py-2 text-[#AEB7E1] font-bold">Medium</button>
                 <button className="border !border-[#AEB7E1] px-3 py-2 text-[#AEB7E1] font-bold">Large</button>
             </div>
+         
 
             <div className="grid grid-cols-3 mt-6 gap-4">
                 {cars && cars.map((val: any, index: number) => (
                     <div className="bg-white rounded-lg col-span-1 p-7" key={index}>
                         <div className="flex justify-center items-center mb-4">
-                            <img src="/images/car.png" alt="" />
+                            <img src={val.image_url} alt="" />
                         </div>
                         <p>{val.name}</p>
                         <h1 className="text-lg mb-2">Rp. {val.price} /hari</h1>

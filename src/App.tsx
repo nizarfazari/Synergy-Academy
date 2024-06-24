@@ -32,7 +32,7 @@ function App() {
             <Route index element={<Car />} />
             <Route path='/dashboard/create' element={<CreateCar />} />
             <Route path='/dashboard/list' element={<ListCars />} />
-            <Route path='/dashboard/edit' element={<EditCar />} />
+            <Route path='/dashboard/edit/:carId' element={<EditCar />} />
           </Route>
           <Route path="/login" element={<Login />} />
 
