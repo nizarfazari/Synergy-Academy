@@ -6,6 +6,15 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 interface CarsProps {
     children: React.ReactElement
 }
+
+
+interface FormData {
+    date: string;
+    driver: string;
+    passenger: string;
+    time: string;
+}
+
 let CarsContext = createContext({});
 export const CarsProvider = ({ children }: CarsProps) => {
     const [cars, setCars] = useState([])
@@ -26,11 +35,55 @@ export const CarsProvider = ({ children }: CarsProps) => {
         }
     };
 
-    const findCars = async (e: any, data : any) => {
+    const findCars = async (e: any, data: FormData) => {
         e.preventDefault();
         console.log(data)
+        const dateTime = new Date(`${data.date} ${data.time}`);
 
-        
+        if (data.driver === undefined || data.driver === "") {
+            alert("Please select a driver");
+            return;
+        } else if (data.passenger == "" && data.driver.toString() == "true") {
+            console.log(cars)
+            const carFilter = cars.filter(
+                (car: any) => (car.available === true && car.availableAt <= dateTime)
+            );
+
+            console.log(carFilter)
+
+            setCars(carFilter)
+            return;
+        } else if (data.passenger != "" && data.driver.toString() == "true") {
+            const carFilter = cars.filter(
+                (car: any) =>
+                    car.available === true &&
+                    car.capacity >= data.passenger &&
+                    car.availableAt <= dateTime
+            );
+
+            setCars(carFilter)
+
+            return;
+        } else if (data.passenger == "" && data.driver.toString() == "false") {
+            const carFilter = cars.filter(
+                (car: any) => car.available === false && car.availableAt <= dateTime
+            );
+            console.log('test')
+            setCars(carFilter);
+
+            return;
+        } else if (data.passenger != "" && data.driver.toString() == "false") {
+            const carFilter = cars.filter(
+                (car: any) =>
+                    car.available === false &&
+                    car.capacity >= data.passenger &&
+                    car.availableAt <= dateTime
+            );
+
+            setCars(carFilter)
+            return
+        }
+
     }
 
     const value = useMemo(() => ({

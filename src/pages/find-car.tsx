@@ -67,7 +67,7 @@ export default function FindCar() {
                             <select
                                 className="form-select"
                                 id="driver"
-                                required
+                                
                                 value={formData.driver}
                                 onChange={handleChange}
                             >
@@ -84,7 +84,7 @@ export default function FindCar() {
                                 type="date"
                                 className="form-control"
                                 id="date"
-                                required
+                                
                                 value={formData.date}
                                 onChange={handleChange}
                             />
@@ -95,7 +95,7 @@ export default function FindCar() {
                                 type="time"
                                 id="time"
                                 className="form-control"
-                                required
+                                
                                 value={formData.time}
                                 onChange={handleChange}
                             />
