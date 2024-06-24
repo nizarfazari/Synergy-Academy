@@ -56,7 +56,7 @@ export default function ListCars() {
         }
     }
     return (
-        <>
+        <div className="mb-20">
             <ul className="breadcrumb">
                 <li><a href="#">Cars</a></li>
                 <li className="active"><a href="#" >List Cars</a></li>
@@ -80,7 +80,7 @@ export default function ListCars() {
 
             <div className="grid grid-cols-3 mt-6 gap-4">
                 {cars && cars.map((val: any, index: number) => (
-                    <div className="bg-white rounded-lg col-span-1 p-7" key={index}>
+                    <div className="bg-white rounded-lg col-span-1 p-7 h-fit" key={index}>
                         <div className="flex justify-center items-center mb-4">
                             <img src={val.image_url} alt="" />
                         </div>
@@ -108,6 +108,6 @@ export default function ListCars() {
                 ))}
 
             </div>
-        </>
+        </div>
     )
 }

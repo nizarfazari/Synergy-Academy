@@ -1,5 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useCars } from "../hooks/useCars";
+import { IoKeyOutline } from "react-icons/io5";
+import { convertToISODate } from "../utils/date-format";
+import { CiClock1 } from "react-icons/ci";
 
 interface Car {
     id: number;
@@ -8,30 +12,27 @@ interface Car {
     year: number;
 }
 export default function FindCar() {
-    const [cars, setCars] = useState<Car[]>([]);
 
 
+    const { cars, findCars } = useCars()
     console.log('Data mobil:', cars);
 
-    const FindCar = async () => {
-        try {
-            const response = await axios.get<Car[]>('https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json');
+    const [formData, setFormData] = useState({
+        driver: '',
+        date: '',
+        time: '',
+        passenger: ''
+    });
 
-            // Data dapat diakses melalui response.data
-            const cars = response.data;
-
-            // Lakukan sesuatu dengan data mobil, contoh:
-            console.log('Data mobil:', cars);
-
-            return cars; // Mengembalikan data mobil
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return []; // Mengembalikan array kosong jika terjadi kesalahan
-        }
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
     };
-    useEffect(() => {
-        FindCar()
-    }, []);
+
+
 
     return (
         <>
@@ -60,26 +61,44 @@ export default function FindCar() {
 
             <main role="main">
                 <section className="search-box">
-                    <div className="search-content">
+                    <form className="search-content" onSubmit={(e) => findCars(e, formData)}>
                         <div className="input-group d-flex flex-column">
                             <p>Tipe Driver</p>
-                            <select className="form-select" id="driver" required>
-                                <option className="item" value="" selected hidden>
+                            <select
+                                className="form-select"
+                                id="driver"
+                                required
+                                value={formData.driver}
+                                onChange={handleChange}
+                            >
+                                <option className="item" value="" disabled hidden>
                                     Pilih Tipe Driver
                                 </option>
                                 <option className="item" value="true">Dengan Sopir</option>
-                                <option className="item" value="false">
-                                    Tanpa Sopir (Lepas Kunci)
-                                </option>
+                                <option className="item" value="false">Tanpa Sopir (Lepas Kunci)</option>
                             </select>
                         </div>
                         <div className="input-group d-flex flex-column">
                             <p>Tanggal</p>
-                            <input type="date" className="form-control" id="date" required />
+                            <input
+                                type="date"
+                                className="form-control"
+                                id="date"
+                                required
+                                value={formData.date}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="input-group d-flex flex-column">
                             <p>Waktu Jemput/Ambil</p>
-                            <input type="time" id="time" className="form-control" required />
+                            <input
+                                type="time"
+                                id="time"
+                                className="form-control"
+                                required
+                                value={formData.time}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="input-group d-flex flex-column">
                             <p>Jumlah Penumpang (Opsional)</p>
@@ -87,8 +106,10 @@ export default function FindCar() {
                                 <input
                                     type="number"
                                     className="form-control item"
-                                    id="passanger"
+                                    id="passenger"
                                     style={{ backgroundColor: 'white' }}
+                                    value={formData.passenger}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -100,15 +121,41 @@ export default function FindCar() {
                         >
                             Cari Mobil
                         </button>
-                    </div>
+                    </form>
                 </section>
 
 
 
-                <div className="container result-container">
-                    <div className="result d-flex" id="cars-container">
+                <div className="container grid grid-cols-3 mt-6 gap-4">
 
-                    </div>
+                    {cars && cars.map((val: any, index: number) => (
+                        <div className="bg-slate-200 rounded-lg col-span-1 p-7 h-fit" key={index}>
+                            <div className="flex justify-center items-center mb-4">
+                                <img src={val.image} alt="" className="w-[350px] h-[240px]" />
+                            </div>
+                            <p>{val.manufacture} - {val.model}</p>
+                            <h1 className="text-lg mb-2">Rp. {val.rentPerDay} /hari</h1>
+                            <div className="flex items-center gap-2 mb-2">
+                                <IoKeyOutline className="text-[#8A8A8A] text-lg" />
+                                <p className="text-md">{val.capacity} Orang </p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <CiClock1 className="text-[#8A8A8A] text-lg" />
+                                <p>{convertToISODate(val.availableAt)}</p>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 w-full mt-4">
+                                {/* <button onClick={() => onDeleteCars(val.id)} className="border !border-[#FA2C5A] text-[#FA2C5A] px-3 py-2 flex items-center gap-3 justify-center">
+                                       <FaTrash />
+                                       <p>Delete</p>
+                                   </button>
+                                   <a href={`/dashboard/edit/${val.id}`} className="text-white bg-[#5CB85F] px-3 py-2 flex items-center gap-3 justify-center">
+                                       <FaEdit />
+                                       <p>Edit</p>
+                                   </a> */}
+                            </div>
+                        </div>
+                    ))}
+
                 </div>
 
             </main>

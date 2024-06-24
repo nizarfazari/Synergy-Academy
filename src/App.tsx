@@ -19,32 +19,31 @@ function App() {
   return (
     <>
       <AuthProvider>
+        <CarsProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path='/find-cars' element={<FindCar />} />
+            </Route>
 
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path='/find-cars' element={<FindCar />} />
-            {/* <CarsProvider>
-            </CarsProvider> */}
-          </Route>
+            <Route element={<LayoutDashboard />} path='/dashboard'>
+              <Route index element={<Car />} />
+              <Route path='/dashboard/create' element={<CreateCar />} />
+              <Route path='/dashboard/list' element={<ListCars />} />
+              <Route path='/dashboard/edit/:carId' element={<EditCar />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
 
-          <Route element={<LayoutDashboard />} path='/dashboard'>
-            <Route index element={<Car />} />
-            <Route path='/dashboard/create' element={<CreateCar />} />
-            <Route path='/dashboard/list' element={<ListCars />} />
-            <Route path='/dashboard/edit/:carId' element={<EditCar />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-
-          {/* <Route path="/dashboard">
+            {/* <Route path="/dashboard">
           <Route index element={
             <Protected>
-              <HomeDashboard />
+            <HomeDashboard />
             </Protected>
-          } />
-          <Route path="login" element={<Login />} />
-        </Route> */}
-        </Routes>
+            } />
+            <Route path="login" element={<Login />} />
+            </Route> */}
+          </Routes>
+        </CarsProvider>
       </AuthProvider>
     </>
   )
