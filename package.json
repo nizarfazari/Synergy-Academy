@@ -5,17 +5,34 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "eslint ./app/app.ts ./app/middleware/authorization.ts",
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
+    "db:rollback": "knex migrate:rollback",
+    "db:rollback:all": "knex migrate:rollback --all",
+    "build": "tsc"
   },
   "author": "Muhammad Nizar Fazari",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.24.7",
+    "@eslint/js": "^9.6.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
+    "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/multer": "^1.4.11",
     "@types/pg": "^8.11.6",
-    "@types/swagger-ui-express": "^4.1.6"
+    "@types/supertest": "^6.0.2",
+    "@types/swagger-ui-express": "^4.1.6",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.56.0",
+    "globals": "^15.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5",
+    "typescript-eslint": "^7.14.1"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
@@ -30,6 +47,7 @@
     "multer": "1.4.5-lts.1",
     "objection": "^3.1.4",
     "pg": "^8.11.5",
+    "supertest": "^7.0.0",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",

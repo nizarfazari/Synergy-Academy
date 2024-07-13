@@ -8,8 +8,7 @@ import { apiRouter } from "./route/api";
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../openapi.json';
 import cors  from 'cors'
-
-export const app: Express = express();
+ const app: Express = express();
 //knex
 const knexInstance = knex({
   client: "postgresql",
@@ -32,3 +31,6 @@ publicRouter.get('/api/v1/api-docs', swaggerUi.setup(swaggerDocument));
 app.use(publicRouter);
 app.use(apiRouter);
 app.use(errorMiddleware);
+
+
+export default app

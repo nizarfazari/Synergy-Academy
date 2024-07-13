@@ -42,7 +42,7 @@ export default class UserServices {
       request.email
     );
     if (isEmailExists) {
-      throw new ErrorResponse(400, "Email sudah terdaftar!");
+      throw new ErrorResponse(409, "Email sudah terdaftar!");
     }
     try {
       const encryptedPassword = await encryptPassword(request.password);
