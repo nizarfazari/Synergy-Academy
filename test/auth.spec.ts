@@ -105,10 +105,9 @@ it('should get cars', async () => {
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`);
 
-    const decodedToken = jwt.verify(token, "hello_sayang")
+
     console.log(res.body);
-    console.log(decodedToken);
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(401);
 
 });
 

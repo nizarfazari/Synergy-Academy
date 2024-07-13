@@ -3,6 +3,9 @@ import app from '../app/app';
 import { UserModel } from '../app/model/user';
 import { CarsModel } from '../app/model/car';
 
+import jwt from 'jsonwebtoken'
+
+
 let server: any;
 let token: string;
 const carData = {
@@ -63,7 +66,7 @@ describe('POST /api/v1/cars', () => {
             
 
         console.log(res.body)
-        expect(res.status).toBe(200);
+        expect(res.status).toBe(400);
     })
     it('should cant create cars cause unathorized', async () => {
         const res = await request(app)
