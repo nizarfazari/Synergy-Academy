@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only index.ts",
     "test": "jest",
-    "lint": "eslint ./app/app.ts ./app/middleware/authorization.ts",
+    "lint": "eslint",
     "db:migrate": "knex migrate:latest",
     "db:seed": "knex seed:run",
     "db:rollback": "knex migrate:rollback",
